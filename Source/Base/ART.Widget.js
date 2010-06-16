@@ -106,7 +106,7 @@ var Widget = ART.Widget = new Class({
 		clearTimeout(this.drawTimer);
 		var args = arguments;
 		this.drawTimer = setTimeout(function(){
-			self.draw.apply(self, arguments);
+			self.draw.apply(self, args);
 		}, 1);
 	},
 	
