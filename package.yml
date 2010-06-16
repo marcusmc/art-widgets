@@ -21,6 +21,7 @@ sources:
   - "Source/Utilities/Stacker.js"
   - "Source/Utilities/Press.js"
   - "Source/Illustrations/ART.Glyphs.js"
+  - "Source/Illustrations/ART.ArrowRect.js"
   - "Source/Widgets/ART.Box.js"
   - "Source/Widgets/ART.Check.js"
   - "Source/Widgets/ART.Radio.js"
@@ -35,3 +36,4 @@ sources:
   - "Source/Widgets/ART.SplitView.js"
   - "Source/Widgets/ART.Popup.js"
   - "Source/Widgets/ART.Window.js"
+  - "Source/Widgets/ART.ArrowBox.js"

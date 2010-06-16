@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>UI ART ArrowBox</title>
+	
+	<!--[if IE]>
+	<script type="text/javascript" src="https://getfirebug.com/releases/lite/beta/firebug.jgz"></script>
+	<![endif]-->
+	
+	<style type="text/css">
+	
+		#pbcontent {
+			padding: 10px;
+			font: 13px/1.2 "Lucida Grande";
+			color: #333;
+		}
+		
+	
+	</style>
+	
+	<!-- compiled assets -->
+	
+	<script src="../assets/mootools-core-1.2.4.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/more/Source/Core/Log.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/more/Source/Interface/Keyboard.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/touch/Source/Touch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/slick/Source/Slick.Parser.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/mootools-color/Source/Color.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.SVG.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.VML.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Base.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Path.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Shapes.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Font.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Fonts/Moderna.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Fonts/Moderna.Bold.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<!-- this package -->
+	
+	<script type="text/javascript" src="../Source/UI/UI.js"></script>
+	<script type="text/javascript" src="../Source/UI/UI.Sheet.js"></script>
+	<script type="text/javascript" src="../Source/UI/UI.Widget.js"></script>
+	<script type="text/javascript" src="../Source/Base/ART.Widget.js"></script>
+	<script type="text/javascript" src="../Source/Base/ART.Sheet.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Button.js"></script>
+	<script type="text/javascript" src="../Source/Illustrations/ART.Glyphs.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Box.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Check.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Radio.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Input.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Search.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Menu.js"></script>
+	<script type="text/javascript" src="../Source/Utilities/Press.js"></script>
+	<script type="text/javascript" src="../Source/Illustrations/ART.ArrowRect.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.ArrowBox.js"></script>
+	
+	<script type="text/javascript">
+	
+	document.addEvent('domready', function(){
+		
+		window.pb = new ART.ArrowBox();
+		
+		pb.inject(document.body);
+		
+		pb.show($('pbcontent'));
+		
+		pb.move(10, 20, 90);
+		
+	});
+		
+	</script>
+
+</head>
+
+<body>
+	
+	<div id="container">
+		
+		<div id="pbcontent">
+			But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.
+		</div>
+		
+	</div>
+	
+</body>
+</html>
