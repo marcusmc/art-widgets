@@ -13,8 +13,9 @@ ART.Sheet.define('arrowbox.art', {
 	'arrow-angle': 0,
 	'background-color': 'hsb(0, 0, 100)',
 	'border-color': 'hsb(0, 0, 0, 0.4)',
-	'border-radius': [3, 3, 3, 3],
+	'border-radius': [5, 5, 5, 5],
 	'border-width': 2,
+	'content-padding': 15,
 	'width': 200
 });
 
@@ -26,9 +27,7 @@ var ArrowBox = ART.ArrowBox = new Class({
 	
 	name: 'arrowbox',
 	
-	options: {
-
-	},
+	options: {},
 	
 	initialize: function(options){
 		this.parent(options);
@@ -45,25 +44,36 @@ var ArrowBox = ART.ArrowBox = new Class({
 		
 		var sheet = this.parent(newSheet), cs = this.currentSheet;
 		
-		if (sheet.width || sheet.borderRadius || sheet.borderWidth || sheet.arrowWidth || sheet.arrowHeight || sheet.arrowAngle != null){
-			this.contentWrapper.setStyles({'width': cs.width});
+		if (sheet.contentPadding != null ||
+			sheet.borderRadius ||
+			sheet.borderWidth != null ||
+			sheet.arrowWidth ||
+			sheet.arrowHeight ||
+			sheet.arrowAngle != null){
 			
-			var height = this.content.offsetHeight;
-			this.resize(cs.width + cs.arrowHeight, height + cs.arrowHeight);
+			this.content.setStyles({visibility: 'hidden', position: 'absolute', top: -1000, left: -1000}).inject(document.body);
+			var height = this.content.offsetHeight, width = this.content.offsetWidth;
+			this.contentWrapper.setStyles({'width': width + cs.contentPadding * 2});
+			
+			this.resize(width + cs.arrowHeight + cs.contentPadding * 2, height + cs.arrowHeight + cs.contentPadding * 2);
 			var angle = cs.arrowAngle;
 			angle = ((angle %= 360) < 0) ? angle + 360 : angle;
 			
-			this.layer.draw(cs.width - 2, height - 2, cs.borderRadius, cs.arrowWidth, cs.arrowHeight, angle);
+			var bw = cs.borderWidth, bw2 = bw / 2;
+			
+			this.layer.draw(width - bw + cs.contentPadding * 2, height - bw + cs.contentPadding * 2, cs.borderRadius, cs.arrowWidth, cs.arrowHeight, angle);
 			
 			if ((angle >= 315 && angle < 360) || (angle >= 0 && angle <= 45)){ //top
-				this.contentWrapper.setStyles({top: cs.arrowHeight, left: 0});
+				this.contentWrapper.setStyles({top: cs.arrowHeight + cs.contentPadding, left: cs.contentPadding});
 			} else if (angle > 225 && angle < 315){ //left
-				this.contentWrapper.setStyles({left: cs.arrowHeight, top: 0});
+				this.contentWrapper.setStyles({left: cs.arrowHeight + cs.contentPadding, top: cs.contentPadding});
 			} else {
-				this.contentWrapper.setStyles({left: 0, top: 0});
+				this.contentWrapper.setStyles({left: cs.contentPadding, top: cs.contentPadding});
 			}
 			
-			this.layer.translate(1, 1);
+			this.layer.translate(bw2, bw2);
+			
+			this.content.setStyles({visibility: 'visible', position: 'static'}).inject(this.contentWrapper);
 		}
 		
 		if (sheet.backgroundColor) this.layer.fill.apply(this.layer, $splat(cs.backgroundColor));
@@ -74,7 +84,6 @@ var ArrowBox = ART.ArrowBox = new Class({
 	
 	show: function(element){
 		this.content = element;
-		this.content.inject(this.contentWrapper);
 		this.element.setStyle('display', 'block');
 		this.deferDraw();
 		return this;
