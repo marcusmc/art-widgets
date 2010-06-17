@@ -53,7 +53,7 @@ var ArrowBox = ART.ArrowBox = new Class({
 			
 			this.content.setStyles({visibility: 'hidden', position: 'absolute', top: -1000, left: -1000}).inject(document.body);
 			var height = this.content.offsetHeight, width = this.content.offsetWidth;
-			this.contentWrapper.setStyles({'width': width + cs.contentPadding * 2});
+			this.contentWrapper.setStyles({'width': width});
 			
 			this.resize(width + cs.arrowHeight + cs.contentPadding * 2, height + cs.arrowHeight + cs.contentPadding * 2);
 			var angle = cs.arrowAngle;
@@ -73,7 +73,7 @@ var ArrowBox = ART.ArrowBox = new Class({
 			
 			this.layer.translate(bw2, bw2);
 			
-			this.content.setStyles({visibility: 'visible', position: 'static'}).inject(this.contentWrapper);
+			this.content.setStyles({visibility: 'visible', position: 'static', top: 0, left: 0}).inject(this.contentWrapper);
 		}
 		
 		if (sheet.backgroundColor) this.layer.fill.apply(this.layer, $splat(cs.backgroundColor));
