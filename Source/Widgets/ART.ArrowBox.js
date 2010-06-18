@@ -10,13 +10,11 @@ provides: ART.ArrowBox
 ART.Sheet.define('arrowbox.art', {
 	'arrow-width': 15,
 	'arrow-height': 10,
-	'arrow-angle': 0,
 	'background-color': 'hsb(0, 0, 100)',
 	'border-color': 'hsb(0, 0, 0, 0.4)',
 	'border-radius': [5, 5, 5, 5],
 	'border-width': 2,
-	'content-padding': 15,
-	'width': 200
+	'content-padding': [10, 10, 10, 10]
 });
 
 (function(){
@@ -27,7 +25,10 @@ var ArrowBox = ART.ArrowBox = new Class({
 	
 	name: 'arrowbox',
 	
-	options: {},
+	options: {
+		arrowSide: 'top',
+		arrowPosition: '50%'
+	},
 	
 	initialize: function(options){
 		this.parent(options);
@@ -44,36 +45,36 @@ var ArrowBox = ART.ArrowBox = new Class({
 		
 		var sheet = this.parent(newSheet), cs = this.currentSheet;
 		
-		if (sheet.contentPadding != null ||
+		if (this.sizeChanged || sheet.contentPadding ||
 			sheet.borderRadius ||
 			sheet.borderWidth != null ||
 			sheet.arrowWidth ||
-			sheet.arrowHeight ||
-			sheet.arrowAngle != null){
-			
-			this.content.setStyles({visibility: 'hidden', position: 'absolute', top: -1000, left: -1000}).inject(document.body);
-			var height = this.content.offsetHeight, width = this.content.offsetWidth;
+			sheet.arrowHeight){
+
+			var height = this.contentHeight, width = this.contentWidth;
 			this.contentWrapper.setStyles({'width': width});
 			
-			this.resize(width + cs.arrowHeight + cs.contentPadding * 2, height + cs.arrowHeight + cs.contentPadding * 2);
-			var angle = cs.arrowAngle;
-			angle = ((angle %= 360) < 0) ? angle + 360 : angle;
+			var bw = cs.borderWidth, bw2 = bw / 2, pad = cs.contentPadding;
+
+			var as = this.options.arrowSide, ap = this.options.arrowPosition;
 			
-			var bw = cs.borderWidth, bw2 = bw / 2;
-			
-			this.layer.draw(width - bw + cs.contentPadding * 2, height - bw + cs.contentPadding * 2, cs.borderRadius, cs.arrowWidth, cs.arrowHeight, angle);
-			
-			if ((angle >= 315 && angle < 360) || (angle >= 0 && angle <= 45)){ //top
-				this.contentWrapper.setStyles({top: cs.arrowHeight + cs.contentPadding, left: cs.contentPadding});
-			} else if (angle > 225 && angle < 315){ //left
-				this.contentWrapper.setStyles({left: cs.arrowHeight + cs.contentPadding, top: cs.contentPadding});
+			if (as == 'top'){
+				this.contentWrapper.setStyles({left: pad[3], top: cs.arrowHeight + pad[0]});
+			} else if (as == 'left'){
+				this.contentWrapper.setStyles({left: cs.arrowHeight + pad[3], top: pad[0]});
 			} else {
-				this.contentWrapper.setStyles({left: cs.contentPadding, top: cs.contentPadding});
+				this.contentWrapper.setStyles({left: pad[3], top: pad[0]});
 			}
 			
-			this.layer.translate(bw2, bw2);
+			if (as == 'top' || as == 'bottom'){
+				this.resize(width + pad[1] + pad[3], height + cs.arrowHeight + pad[0] + pad[2]);
+			} else {
+				this.resize(width + cs.arrowHeight + pad[1] + pad[3], height + pad[0] + pad[2]);
+			}
 			
-			this.content.setStyles({visibility: 'visible', position: 'static', top: 0, left: 0}).inject(this.contentWrapper);
+			this.layer.draw(width - bw + pad[1] + pad[3], height - bw + pad[0] + pad[2], cs.borderRadius, cs.arrowWidth, cs.arrowHeight, as, ap);
+			
+			this.layer.translate(bw2, bw2);
 		}
 		
 		if (sheet.backgroundColor) this.layer.fill.apply(this.layer, $splat(cs.backgroundColor));
@@ -83,21 +84,24 @@ var ArrowBox = ART.ArrowBox = new Class({
 	},
 	
 	show: function(element){
-		this.content = element;
+		this.content = $(element);
+		this.content.setStyles({visibility: 'hidden', position: 'absolute', top: -1000, left: -1000}).inject(document.body);
+		this.sizeChanged = (this.contentHeight != this.content.offsetHeight) || (this.contentWidth != this.content.offsetWidth);
+		this.contentHeight = this.content.offsetHeight; this.contentWidth = this.content.offsetWidth;
+		this.draw();
+		this.content.setStyles({visibility: 'visible', position: 'static', top: 0, left: 0}).inject(this.contentWrapper);
 		this.element.setStyle('display', 'block');
-		this.deferDraw();
 		return this;
 	},
 	
 	hide: function(){
-		if (this.content) this.content.dispose();
 		this.element.setStyle('display', 'none');
+		if (this.content) this.content.dispose();
 		return this;
 	},
 	
-	move: function(x, y, angle){
-		this.element.setStyles({top: y, left: x});
-		if (angle != null) this.deferDraw({arrowAngle: angle});
+	move: function(x, y){
+		this.element.setStyles({left: x, top: y});
 		return this;
 	}
 	

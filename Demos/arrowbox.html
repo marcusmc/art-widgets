@@ -11,10 +11,20 @@
 	
 	<style type="text/css">
 	
-		#pbcontent {
-			font: 13px/1.2 "Lucida Grande";
+		* {
+			line-height: 0.8;
+		}
+	
+		#content {
+			font: 13px "Lucida Grande";
 			color: #333;
 			width: 300px;
+			visibility: hidden;
+		}
+		
+		#smallcontent {
+			font: 11px "Lucida Grande";
+			color: #333;
 			visibility: hidden;
 		}
 		
@@ -66,13 +76,17 @@
 	
 	document.addEvent('domready', function(){
 		
-		window.pb = new ART.ArrowBox();
+		window.ab = new ART.ArrowBox({arrowSide: "top", arrowPosition: "50%"});
 		
-		pb.inject(document.body);
+		ab.inject(document.body);
+		ab.show('content');
+		ab.move(10, 20);
 		
-		pb.show($('pbcontent'));
+		window.ab2 = new ART.ArrowBox({arrowSide: "left", arrowPosition: "50%"});
 		
-		pb.move(10, 20, 90);
+		ab2.inject(document.body);
+		ab2.show('smallcontent');
+		ab2.move(400, 30);
 		
 	});
 		
@@ -84,9 +98,11 @@
 	
 	<div id="container">
 		
-		<div id="pbcontent">
+		<div id="content">
 			But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful.
 		</div>
+		
+		<span id="smallcontent">Lorem ipsum dolor sit amet</span>
 		
 	</div>
 	
