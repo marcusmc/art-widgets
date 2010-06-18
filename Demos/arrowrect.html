@@ -59,17 +59,11 @@
 	
 	document.addEvent('domready', function(){
 		
-		var c = new ART(110, 110);
+		var c = new ART(220, 110);
 		
-		var rp1 = new ART.ArrowRect(100, 100, 10, 15, 10, 90).fill('#000').inject(c);
+		var rp1 = new ART.ArrowRect(100, 100, 10, 15, 10, 'top', 20).fill('#000').inject(c);
 		
-		var p = 0;
-		
-		(function(){
-			p += 1;
-			if (p >= 360) p = 0;
-			rp1.draw(100, 100, 10, 15, 10, p);
-		}).periodical(33);
+		var rp2 = new ART.ArrowRect(100, 100, 10, 15, 10, 'right', "50%").fill('#000').translate(110, 0).inject(c);
 		
 		c.inject($('container'));
 		
