@@ -8,10 +8,10 @@ provides: ART.ArrowBox
 */
 
 ART.Sheet.define('arrowbox.art', {
-	'arrow-width': 15,
-	'arrow-height': 10,
-	'background-color': 'hsb(0, 0, 100)',
-	'border-color': 'hsb(0, 0, 0, 0.4)',
+	'arrow-width': 10,
+	'arrow-height': 8,
+	'background-color': ['hsb(0, 0, 100)', 'hsb(0, 0, 100)', 'hsb(0, 0, 95)'],
+	'border-color': 'hsb(0, 0, 0, 0.5)',
 	'border-radius': [5, 5, 5, 5],
 	'border-width': 2,
 	'content-padding': [10, 10, 10, 10]
@@ -45,13 +45,14 @@ var ArrowBox = ART.ArrowBox = new Class({
 		
 		var sheet = this.parent(newSheet), cs = this.currentSheet;
 		
-		if (this.sizeChanged || sheet.contentPadding ||
+		if (this.redraw || sheet.contentPadding ||
 			sheet.borderRadius ||
 			sheet.borderWidth != null ||
 			sheet.arrowWidth ||
 			sheet.arrowHeight){
 
 			var height = this.contentHeight, width = this.contentWidth;
+			
 			this.contentWrapper.setStyles({'width': width});
 			
 			var bw = cs.borderWidth, bw2 = bw / 2, pad = cs.contentPadding;
@@ -83,11 +84,15 @@ var ArrowBox = ART.ArrowBox = new Class({
 		return this;
 	},
 	
-	show: function(element){
+	show: function(element, side, position){
 		this.content = $(element);
 		this.content.setStyles({visibility: 'hidden', position: 'absolute', top: -1000, left: -1000}).inject(document.body);
-		this.sizeChanged = (this.contentHeight != this.content.offsetHeight) || (this.contentWidth != this.content.offsetWidth);
+		this.redraw = (this.contentHeight != this.content.offsetHeight) || (this.contentWidth != this.content.offsetWidth);
 		this.contentHeight = this.content.offsetHeight; this.contentWidth = this.content.offsetWidth;
+		
+		if (side != null) this.options.arrowSide = side;
+		if (position != null) this.options.arrowPosition = position;
+		
 		this.draw();
 		this.content.setStyles({visibility: 'visible', position: 'static', top: 0, left: 0}).inject(this.contentWrapper);
 		this.element.setStyle('display', 'block');

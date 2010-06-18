@@ -36,7 +36,7 @@ ART.ArrowRect = new Class({
 
 		path.move(0, tl);
 		
-		if (typeof ap == 'string') ap = ((sides[as] - aw) * (ap.toInt() / 100));
+		if (typeof ap == 'string') ap = ((sides[as] - aw) * (ap.toFloat() / 100));
 		if (ap < 0) ap = 0;
 		else if (ap > sides[as] - aw) ap = sides[as] - aw;
 		var ae = sides[as] - ap - aw, aw2 = aw / 2;
