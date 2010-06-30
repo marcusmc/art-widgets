@@ -273,12 +273,9 @@ ART.Window = new Class({
 			if (this.options[button]) {
 				var windowButton = this.buttons[button] = new ART.Button({
 					className: button + ' wincontrol art',
-					tabIndex: -1
+					tabIndex: -1,
+					stopPropagation: true
 				}).inject(this, this.header);
-				
-				$(windowButton).addEvent('mousedown', function(event){
-					event.stopPropagation();
-				});
 				
 				document.id(this.buttons[button]).setStyles({
 					'position': 'absolute',
