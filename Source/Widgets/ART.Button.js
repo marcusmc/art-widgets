@@ -62,7 +62,8 @@ var Button = ART.Button = new Class({
 		//text: null,
 		//glyph: null,
 		tabIndex: null,
-		blurOnElementBlur: true
+		blurOnElementBlur: true,
+		stopPropagation: false
 	},
 	
 	initialize: function(options){
@@ -77,7 +78,7 @@ var Button = ART.Button = new Class({
 		
 		var self = this;
 		
-		var press = this.press = new Press(this.element);
+		var press = this.press = new Press(this.element, {stopPropagation: this.options.stopPropagation});
 		
 		press.addEvent('down', function(){
 			self.activate();

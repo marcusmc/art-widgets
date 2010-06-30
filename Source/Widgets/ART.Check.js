@@ -51,7 +51,8 @@ var Check = ART.Check = new Class({
 	name: 'check',
 	
 	options: {
-		inputElement: null
+		inputElement: null,
+		stopPropagation: false
 	},
 	
 	initialize: function(options){
@@ -65,7 +66,7 @@ var Check = ART.Check = new Class({
 		
 		var self = this;
 		
-		var press = new Press(this.element);
+		var press = new Press(this.element, {stopPropagation: this.options.stopPropagation});
 		
 		press.addEvent('down', function(){
 			self.activate();
