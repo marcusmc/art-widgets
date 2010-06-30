@@ -9,9 +9,14 @@ provides: Press
 
 var Press = new Class({
 	
-	Implements: Events,
+	Implements: [Events, Options],
 	
-	initialize: function(element){
+	options: {
+		stopPropagation: false
+	},
+	
+	initialize: function(element, options){
+		this.setOptions(options);
 		this.element = document.id(element);
 		var self = this;
 		
@@ -25,13 +30,15 @@ var Press = new Class({
 			if (self.isMouseDown) self.fireEvent('cancel');
 		};
 		
-		this.onMouseDown = function(){
+		this.onMouseDown = function(event){
+			if (self.options.stopPropagation) event.stopPropagation();
 			document.addEvent('mouseup', self.onDocMouseUp);
 			self.isMouseDown = true;
 			self.fireEvent('down');
 		};
 		
 		this.onMouseUp = function(){
+			if (self.options.stopPropagation) event.stopPropagation();
 			document.removeEvent('mouseup', self.onDocMouseUp);
 			self.isMouseDown = false;
 			self.fireEvent('press');

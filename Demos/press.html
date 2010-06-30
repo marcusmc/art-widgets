@@ -65,7 +65,7 @@
 		
 		var container = $('container');
 		
-		var press = new Press(container);
+		var press = new Press(container, {stopPropagation: true});
 		
 		press.addEvent('down', function(){
 			container.setStyle('background-color', 'red');
@@ -77,6 +77,10 @@
 		
 		press.addEvent('press', function(){
 			container.setStyle('background-color', 'green');
+		});
+		
+		document.addEvent('mousedown', function(){
+			alert("DOCUMENT HAS BEEN CLICKED");
 		});
 		
 		
