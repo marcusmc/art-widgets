@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>UI ART ArrowTips</title>
+	
+	<!--[if IE]>
+	<script type="text/javascript" src="https://getfirebug.com/releases/lite/beta/firebug.jgz"></script>
+	<![endif]-->
+	
+	<style type="text/css">
+	
+		body {
+			text-align: center;
+			background-color: #ddd;
+		}
+		
+		#container {
+			margin: 50px auto;
+		}
+		
+		#container2 {
+			margin: 50px auto;
+		}
+	
+		.arrow-tip {
+			font: 12px "Arial";
+			color: #333;
+		}
+		
+		.arrow-tip-black {
+			font: 12px "Arial";
+			color: #ccc;
+		}
+		
+		* {
+			line-height: 0.8;
+		}
+		
+	
+	</style>
+	
+	<!-- compiled assets -->
+	
+	<script src="../assets/mootools-core-1.2.4.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/more/Source/Core/Log.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/more/Source/Interface/Keyboard.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="../assets/touch/Source/Touch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/slick/Source/Slick.Parser.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/mootools-color/Source/Color.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.SVG.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.VML.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Base.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Path.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Shapes.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Source/ART.Font.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Fonts/Moderna.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../assets/art/Fonts/Moderna.Bold.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	<!-- this package -->
+	
+	<script type="text/javascript" src="../Source/UI/UI.js"></script>
+	<script type="text/javascript" src="../Source/UI/UI.Sheet.js"></script>
+	<script type="text/javascript" src="../Source/UI/UI.Widget.js"></script>
+	<script type="text/javascript" src="../Source/Base/ART.Widget.js"></script>
+	<script type="text/javascript" src="../Source/Base/ART.Sheet.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Button.js"></script>
+	<script type="text/javascript" src="../Source/Illustrations/ART.Glyphs.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Box.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Check.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Radio.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Input.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Search.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.Menu.js"></script>
+	<script type="text/javascript" src="../Source/Utilities/Press.js"></script>
+	<script type="text/javascript" src="../Source/Illustrations/ART.ArrowRect.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.ArrowBox.js"></script>
+	<script type="text/javascript" src="../Source/Widgets/ART.ArrowTips.js"></script>
+	
+	<script type="text/javascript">
+	
+	ART.Sheet.define('arrowtip.tip-black.art', {
+		'arrow-width': 10,
+		'arrow-height': 8,
+		'background-color': ['hsb(0, 0, 30)', 'hsb(0, 0, 10)'],
+		'border-color': 'hsb(0, 0, 100, 0.95)',
+		'border-radius': [5, 5, 5, 5],
+		'border-width': 2,
+		'content-padding': [10, 10, 10, 10]
+	});
+	
+	document.addEvent('domready', function(){
+
+		window.at = new ART.ArrowTips($$('#container a'), {
+			className: 'tip-normal',
+			getContent: function(){
+				return new Element('span', {text: this.get('data-title'), 'class': 'arrow-tip'});
+			},
+			fixed: true,
+			position: '50%',
+			side: 'bottom',
+			offset: {x: 0, y: 15}
+		});
+
+		window.at2 = new ART.ArrowTips($$('#container2 a'), {
+			className: 'tip-black',
+			getContent: function(){
+				return new Element('span', {text: this.get('data-title'), 'class': 'arrow-tip-black'});
+			},
+			fixed: true,
+			position: '50%',
+			side: 'bottom',
+			arrowSide: 'top',
+			offset: {x: 0, y: 20}
+		});
+
+	});
+		
+	</script>
+
+</head>
+
+<body>
+	
+	<div id="container">
+		
+		<a href="http://mootools.net/core" data-title="MooTools Core official website">MooTools Core</a> | 
+		<a href="http://mootools.net/more" data-title="MooTools More official website">MooTools More</a> | 
+		<a href="http://mootools.net/art" data-title="MooTools ART official website">MooTools ART</a>
+		
+	</div>
+	
+	<div id="container2">
+		
+		<a href="http://mootools.net/core" data-title="MooTools Core official website">MooTools Core</a> | 
+		<a href="http://mootools.net/more" data-title="MooTools More official website">MooTools More</a> | 
+		<a href="http://mootools.net/art" data-title="MooTools ART official website">MooTools ART</a>
+		
+	</div>
+	
+</body>
+</html>
