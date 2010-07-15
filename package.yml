@@ -41,5 +41,7 @@ sources:
   - "Source/Behavior/Behavior.ArtInput.js"
   - "Source/Behavior/Behavior.ArtButton.js"
   - "Source/Behavior/Behavior.HtmlTable.js"
+  - "Source/Behavior/Behavior.SplitView.js"
+  - "Source/Behavior/Behavior.Tips.js"
   - "Source/Element/Element.Data.js"
 
