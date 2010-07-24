@@ -25,15 +25,14 @@ script: Behavior.SplitView.js
 
 Behavior.addGlobalFilters({
 
-	SplitView: function(element, events) {
-		/* Not sure what to do with this line. */
-                //container.setStyle('overflow', 'hidden');
+	SplitView: function(splitview, methods) {
+		
+                methods.getContentElement().setStyle('overflow', 'hidden');
 		//for all div.splitview containers, get their left and right column and instantiate an ART.SplitView
 		//if the container has the class "resizable" then make it so
 		//ditto for the foldable option
 		//if the left or right columns have explicit style="width: Xpx" assignments
 		//resize the side to match that statement; if both have it, the right one wins
-                var splitview = element;
                 var left = splitview.getElement('.left_col');
                 var right = splitview.getElement('.right_col');
                 var top = splitview.getElement('.top_col');
