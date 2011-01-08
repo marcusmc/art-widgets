@@ -83,10 +83,10 @@ Behavior.addGlobalFilters({
 			parentWidget: parent
 		};
 		conf.sides.each(function(side) {
-			splitviewContent[side + 'Content'] = conf.elements[side];
+				splitviewContent[side + 'Content'] = conf.elements[side];
 		});
 		var splitview = new whichSplit(splitviewContent);
-				splitview.register(parent);
+		splitview.register(parent);
 		splitview.draw();
 
 		addLinkers(document.id(splitview));
@@ -229,7 +229,7 @@ var addLinkers = function(element){
 			for (key in resize) {
 				if (sides.contains(key)) side = key;
 			}
-			widget.fold(side, resize[side], resize.hideSplitter).chain(function(){
+			widget.fold(side, resize[side], resize.hideSplitter, resize.noFx).chain(function(){
 				widget.fireEvent('postFold', [resize, e, link]);
 			});
 		},
@@ -240,7 +240,7 @@ var addLinkers = function(element){
 			if (!widget) return;
 			var resize = link.get('data', 'splitview-toggle', true);
 			if (!resize) return;
-			widget.toggle(resize.side, resize.hideSplitter).chain(function(){
+			widget.toggle(resize.side, resize.hideSplitter, resize.noFx).chain(function(){
 				widget.fireEvent('postFold', [resize, e, link]);
 				manageToggleState(widget, link);
 			});
