@@ -128,7 +128,10 @@ Behavior.addGlobalFilters({
 		});
 		splitview.getParentSize = function() {
 			var parent = splitview.element.getParent();
-			return parent.measure(function(){ return parent.getSize(); });
+			splitview.element.hide();
+			var size = parent.measure(function(){ return parent.getSize(); });
+			splitview.element.show();
+			return size;
 		};
 		var resizeSplitview = function() {
 			var size = splitview.getParentSize();
