@@ -36,7 +36,7 @@ ART.Sheet.define('window.art', {
 	'content-overflow': 'auto',
 	
 	'corner-radius': 4,
-	'header-height': 24,
+	'header-height': 26,
 	'footer-height': 17,
 	
 	'caption-font-color': hsb(0, 0, 30),

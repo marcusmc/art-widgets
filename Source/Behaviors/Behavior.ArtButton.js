@@ -44,7 +44,7 @@ ART.Button.Icon = new Class({
 Behavior.addGlobalFilters({
 
 	ArtButtonBar: function(element){
-		var position = element.get('data', 'bar-position');
+		var position = element.getData('bar-position');
 		var above = position == "above";
 		var below = position == "below";
 		var buttons = element.getElements('[data-filters*=ArtButton]');
@@ -108,7 +108,7 @@ Behavior.addGlobalFilters({
 						backgroundRepeat: 'no-repeat'
 					},
 					button.getStyles('background-image', 'background-position'),
-					button.get('data', 'icon-styles', true)
+					button.getData('icon-styles', true)
 				)
 			};
 		}
