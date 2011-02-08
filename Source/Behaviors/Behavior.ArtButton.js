@@ -108,7 +108,7 @@ Behavior.addGlobalFilters({
 						backgroundRepeat: 'no-repeat'
 					},
 					button.getStyles('background-image', 'background-position'),
-					button.getData('icon-styles', true)
+					button.getJSONData('icon-styles')
 				)
 			};
 		}
