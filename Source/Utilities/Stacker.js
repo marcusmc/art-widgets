@@ -155,7 +155,6 @@ var Stacker = new Class({
 	//noOrder - (boolean) if true will skip the z-index order phase
 	//force - (boolean) if true, will bring the instance to the top even if it's already focused
 	focus: function(instance, noOrder, force){
-		if (window.paused) debugger;
 		if (!instance || (instance == this.focused && instance._stacked && instance.getState('focused') && !force)) return;
 		if (this.focused && this.focused != instance) this.focused.blur();
 		if (instance.getState('disabled')) return;

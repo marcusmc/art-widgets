@@ -525,7 +525,6 @@ ART.Window = new Class({
 			// compute the height and width for the instance
 			var ranges = this.getSizeRange();
 			if (sheet.height != null && sheet.width != null) {
-				if (window.paused) debugger;
 				cs.height = sheet.height.limit(ranges.minHeight, ranges.maxHeight < ranges.minHeight ? ranges.minHeight : ranges.maxHeight);
 				cs.width = sheet.width.limit(ranges.minWidth, ranges.maxWidth < ranges.minWidth ? ranges.minWidth : ranges.maxWidth);
 				if (cs.height < cs.headerHeight + cs.footerHeight) cs.height = cs.headerHeight + cs.footerHeight;

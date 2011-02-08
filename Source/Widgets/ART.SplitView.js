@@ -331,7 +331,6 @@ var splitter = {
 		var other = this._getOtherSide(side);;
 		var current = this[toggle];
 		var previous = this._previous[side];
-		if (window.paused) debugger;
 		if (previous == null) previous = this[other];
 		var to = current == 0 ? previous : 0;
 		this.fold(side, to, hideSplitter, immediate);
