@@ -67,8 +67,8 @@ Behavior.addGlobalFilters({
 				splitterHidden = true;
 				splitter.setStyle('display', 'block');
 			}
-			if (left) styles['splitter-width'] = splitter.getSize().x;
-			else styles['splitter-height'] = splitter.getSize().y;
+			if (left && splitter.style.width) styles['splitter-width'] = splitter.style.width;
+			else if (splitter.style.height) styles['splitter-height'] = splitter.style.height;
 		}
 
 		var whichSplit = left ? ART.SplitView : ART.SplitView.Vertical;
@@ -76,7 +76,7 @@ Behavior.addGlobalFilters({
 		var splitviewContent = {
 			resizable: element.hasClass("resizable"),
 			foldable: element.hasClass("foldable"),
-			splitterContent: element.getChildren('.splitter_col')[0],
+			splitterContent: splitter,
 			styles: styles,
 			fixed: conf.fixed || 'left',
 			element: element,
