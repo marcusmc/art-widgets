@@ -318,7 +318,7 @@ var splitter = {
 		return this;
 	},
 
-	toggle: function(side, hideSplitter, immediate) {
+	toggle: function(side, hideSplitter, immediate, width) {
 		var getWidthStr = function(side) {
 			return {
 				'left': 'leftWidth',
@@ -328,11 +328,18 @@ var splitter = {
 			}[side];
 		};
 		var toggle = getWidthStr(side);
-		var other = this._getOtherSide(side);;
 		var current = this[toggle];
-		var previous = this._previous[side];
-		if (previous == null) previous = this[other];
-		var to = current == 0 ? previous : 0;
+		var to = 0;
+		if (current == 0) {
+			if (width) {
+				to = width;
+			} else {
+				var other = this._getOtherSide(side);;
+				var previous = this._previous[side];
+				if (previous == null) return this;
+				to = previous;
+			}
+		}
 		this.fold(side, to, hideSplitter, immediate);
 		return this;
 	},
