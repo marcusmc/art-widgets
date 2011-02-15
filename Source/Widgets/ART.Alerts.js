@@ -264,6 +264,8 @@ ART.Prompt = new Class({
 				type: 'text',
 				styles: styles
 			}).inject(this.inputContainer);
+		} else {
+			this.findInputs();
 		}
 	},
 	findInputs: function(){
