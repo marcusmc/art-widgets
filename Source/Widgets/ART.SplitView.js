@@ -233,8 +233,9 @@ var splitter = {
 
 	_getPaddingValues: function(side, values){
 		var sum = 0;
+		var o = this._orientations;
 		for (var i = 0; i < values.length; i++) {
-			sum += this._paddings[side][{'top':0, 'right':1, 'bottom':2, 'left':3}[values[i]]];
+			sum += this._paddings[o[side]][{'top':0, 'right':1, 'bottom':2, 'left':3}[values[i]]];
 		}
 		return sum;
 	},

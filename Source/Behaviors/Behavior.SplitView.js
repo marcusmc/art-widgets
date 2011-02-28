@@ -87,6 +87,10 @@ Behavior.addGlobalFilters({
 		});
 		var splitview = new whichSplit(splitviewContent);
 		splitview.register(parent);
+		element.get('class').split(' ').each(function(cls){
+			cls = cls.trim();
+			if (cls) splitview.addClass(cls);
+		});
 		splitview.draw();
 
 		addLinkers(document.id(splitview));
