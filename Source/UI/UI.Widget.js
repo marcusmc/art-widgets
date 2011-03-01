@@ -83,6 +83,14 @@ var Widget = UI.Widget = new Class({
 	hasClass: function(className){
 		return this._classNames.contains(className);
 	},
+
+	toggleClass: function(className) {
+		if (this.hasClass(className)) {
+			return this.removeClass(className);
+		} else {
+			return this.addClass(className);
+		}
+	},
 	
 	setStyles: function(styles){
 		var camelCase = {};
