@@ -63,7 +63,7 @@ Behavior.addGlobalFilters({
 		var styles = {}, splitterHidden;
 		var splitter = element.getChildren('.splitter_col')[0];
 		if (splitter) {
-			if (splitter.getStyle('display', 'none')) {
+			if (splitter.getStyle('display') == 'none') {
 				splitterHidden = true;
 				splitter.setStyle('display', 'block');
 			}
@@ -169,8 +169,14 @@ Behavior.addGlobalPlugin('SplitView', 'ResizeOnContainingSplitView', function(el
 			//Find opposite side...that being the side that the splitview is not in.
 			var containingOrientation = containingSplitview.getOrientation();
 			var containingSvSides = containingSplitview.getSides();
-			var left = containingSvSides['left'];
-			var right = containingSvSides['right'];
+			var leftString = 'left';
+			var rightString = 'right';
+			if(containingOrientation == 'vertical') {
+				leftString = 'top';
+				rightString = 'bottom';
+			}
+			var left = containingSvSides[leftString];
+			var right = containingSvSides[rightString];
 			if (left.hasChild(element)) {
 				thisSide = left;
 				otherSide = right;
@@ -247,7 +253,7 @@ var addLinkers = function(element){
 			if (!widget) return;
 			var resize = link.get('data', 'splitview-toggle', true);
 			if (!resize) return;
-			widget.toggle(resize.side, resize.hideSplitter, resize.noFx).chain(function(){
+			widget.toggle(resize.side, resize.hideSplitter, resize.noFx, resize.width).chain(function(){
 				widget.fireEvent('postFold', [resize, e, link]);
 				manageToggleState(widget, link);
 			});
