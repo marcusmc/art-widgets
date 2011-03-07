@@ -93,7 +93,7 @@ Behavior.addGlobalFilters({
 		});
 		splitview.draw();
 
-		addLinkers(document.id(splitview));
+		addLinkers(document.id(splitview), splitview);
 
 		var sized;
 		conf.sides.each(function(side) {
@@ -232,12 +232,12 @@ var manageToggleState = function(widget, toggle) {
 
 
 
-var addLinkers = function(element){
+var addLinkers = function(element, splitview){
 	element.addEvents({
 		'click:relay([data-splitview-resize])': function(e, link){
 			if (document.id(e.target).get('tag') == 'a') e.preventDefault();
 			var widget = getWidget(link);
-			if (!widget) return;
+			if (!widget || widget != splitview) return;
 			var resize = link.get('data', 'splitview-resize', true);
 			if (!resize) return;
 			var side;
@@ -253,7 +253,7 @@ var addLinkers = function(element){
 		'click:relay([data-splitview-toggle])': function(e, link){
 			if (document.id(e.target).get('tag') == 'a') e.preventDefault();
 			var widget = getWidget(link);
-			if (!widget) return;
+			if (!widget || widget != splitview) return;
 			var resize = link.get('data', 'splitview-toggle', true);
 			if (!resize) return;
 			widget.toggle(resize.side, resize.hideSplitter, resize.noFx, resize.width).chain(function(){
