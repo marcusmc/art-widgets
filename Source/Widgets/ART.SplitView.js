@@ -247,11 +247,11 @@ var splitter = {
 
 		var padding = this._getPaddingValues(side, [side, otherSide]);
 		this[o[side]].setStyle(o.dimension, sizes.sideWidth - padding);
-		this[sizes.side + o.dimension.capitalize()] = sizes.sideWidth;
+		this[o[sizes.side] + o.dimension.capitalize()] = sizes.sideWidth;
 
 		padding = this._getPaddingValues(otherSide, [side, otherSide]);
 		this[o[otherSide]].setStyle(o.dimension, sizes.otherSideWidth - padding);
-		this[sizes.otherSide + o.dimension.capitalize()] = sizes.otherSideWidth;
+		this[o[sizes.otherSide] + o.dimension.capitalize()] = sizes.otherSideWidth;
 		this.fireEvent('resizeSide', sizes);
 	},
 	
