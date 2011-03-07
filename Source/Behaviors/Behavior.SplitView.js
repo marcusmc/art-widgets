@@ -204,10 +204,24 @@ Behavior.addGlobalPlugin('SplitView', 'ResizeOnContainingSplitView', function(el
 
 });
 
+var manageOpenClass = function(target, side, to) {
+		if (to > 0) target.addClass(side + '-open').addClass('splitview-open');
+		else target.removeClass(side + '-open').removeClass('splitview-open');
+};
+
 var getWidget = function(link) {
 	var splitview = link.getParent('[data-filters*=SplitView]');
 	if (!splitview) return;
-	return splitview.get('widget');
+	var widget = splitview.get('widget');
+	widget.addEvent('fold', function(side, to, splitterHidden) {
+		var target = link.get('widget') || link;
+		manageOpenClass(target, side, to);
+	});
+	widget.addEvent('resizeSide', function(sizes) {
+		var target = link.get('widget') || link;
+		manageOpenClass(target, sizes.side, sizes.sideWidth);
+	});
+	return widget;
 };
 
 var getWidthStr = function(side) {
