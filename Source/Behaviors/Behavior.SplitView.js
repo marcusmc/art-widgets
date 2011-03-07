@@ -122,8 +122,11 @@ Behavior.addGlobalFilters({
 					x: x,
 					y: y
 				};
+				splitview.lastSize = originalSize;
 				splitview.resize(x, y);
 			} else {
+				splitview.lastSize.x = x;
+				splitview.lastSize.y = y;
 				splitview.resizer.delay(1);
 			}
 		}.bind(this);
@@ -139,7 +142,7 @@ Behavior.addGlobalFilters({
 		};
 		var resizeSplitview = function() {
 			var size = splitview.getParentSize();
-			splitview.resizer(size.x, size.y);
+			if(size.x != splitview.lastSize.x || size.y != splitview.lastSize.y) splitview.resizer(size.x, size.y);
 		};
 		behaviorAPI.addEvents({
 			show: resizeSplitview
