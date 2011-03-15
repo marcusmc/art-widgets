@@ -140,6 +140,9 @@ Behavior.addGlobalFilters({
 			splitview.element.show();
 			return size;
 		};
+		splitview.addEvent('resizeSide', function() {
+			behaviorAPI.fireEvent('layoutChangeEnd');
+		});
 		var resizeSplitview = function() {
 			var size = splitview.getParentSize();
 			if(size.x != splitview.lastSize.x || size.y != splitview.lastSize.y) splitview.resizer(size.x, size.y);
